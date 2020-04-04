@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BerlinClock.Classes
+﻿namespace BerlinClock.Classes
 {
     public class TimeConverter : ITimeConverter
     {
@@ -13,16 +11,7 @@ namespace BerlinClock.Classes
 
         public string ConvertTime(string aTime)
         {
-            Time time;
-            try
-            {
-                time = new Time(aTime);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw new InvalidTimeException();
-            }
+            var time = new Time(aTime);
 
             return this.clock.ConvertTime(time);
         }

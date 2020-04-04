@@ -18,23 +18,15 @@ namespace BerlinClock.Tests.UnitTests
         }
 
         [Test]
-        public void WhenPassingInvalidTimeString_ThenThrowsInvalidTimeException()
-        {
-            Action action = () => this.timeConverter.ConvertTime("invalidTime");
-
-            Assert.That(action, Throws.Exception.TypeOf<InvalidTimeException>());
-        }
-
-        [Test]
-        public void WhenPassingValidTimeString_ThenCorrectlyParsesStringAndCallsClock()
+        public void CallsClock()
         {
             this.timeConverter.ConvertTime("12:15:34");
 
-            this.clockMock.Verify(clock => clock.ConvertTime(It.Is<Time>(time => time.Hour == 12 && time.Minute == 15 && time.Second == 34)), Times.Once);
+            this.clockMock.Verify(clock => clock.ConvertTime(It.IsAny<Time>()), Times.Once);
         } 
 
         [Test]
-        public void WhenPassingValidTimeString_ThenReturnsConvertedTime()
+        public void ReturnsConvertedTime()
         {
             const string convertedTime = "CONVERTED";
             this.clockMock.Setup(clock => clock.ConvertTime(It.IsAny<Time>())).Returns(convertedTime);
